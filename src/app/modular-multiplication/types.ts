@@ -1,9 +1,10 @@
+import { Vector } from "p5";
 
-interface Shape {
+export interface Shape {
     name: string;
     enabled: boolean;
     radius: number,
-    points: [],
+    points: Vector[],
     totalPoints: number,
     multiplier: number,
     color: string,

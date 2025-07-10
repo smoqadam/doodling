@@ -1,4 +1,5 @@
 import p5 from 'p5';
+import { Shape } from './types';
 
 export const drawShape = (p: p5, shape: Shape) => {
     p.stroke(shape.color);
@@ -29,7 +30,7 @@ export const drawShape = (p: p5, shape: Shape) => {
 }
 
 
-function generateCirclePoints(p, shape) {
+function generateCirclePoints(p: p5, shape: Shape) {
   let points = [];
   for (let i = 0; i < shape.totalPoints; i++) {
       let angle = p.TWO_PI * i / shape.totalPoints;
@@ -41,7 +42,7 @@ function generateCirclePoints(p, shape) {
 }
 
 
-function generateSquarePoints(p, shape: Shape) {
+function generateSquarePoints(p: p5, shape: Shape) {
   let vertices = [
       p.createVector(-shape.radius, -shape.radius),  // top-lefr
       p.createVector(shape.radius, -shape.radius),   // top-right
@@ -52,7 +53,7 @@ function generateSquarePoints(p, shape: Shape) {
   return extractPathPointsFromVertices(p, vertices, shape);
 }
 
-function extractPathPointsFromVertices(p, vertices, shape) {
+function extractPathPointsFromVertices(p: p5, vertices: p5.Vector[], shape: Shape) {
   let points = [];
   let edges = [];
   let totalLength = 0;
@@ -84,7 +85,7 @@ function extractPathPointsFromVertices(p, vertices, shape) {
   return points;
 }
 
-function applyModularMultiplication(p, shape: Shape) {
+function applyModularMultiplication(p: p5, shape: Shape) {
   if (!shape.points || shape.points.length === 0) return;
   
   for (let i = 0; i < Math.min(shape.totalPoints, shape.points.length); i++) {

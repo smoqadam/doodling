@@ -3,6 +3,8 @@
 import P5Canvas from '@/components/P5Canvas';
 import { useState } from 'react';
 import { drawShape } from './draw';
+import p5 from 'p5';
+import { Shape } from './types';
 
 export default function ModularMultiplicationPage() {
   const [radius, setRadius] = useState(100);
@@ -69,10 +71,11 @@ export default function ModularMultiplicationPage() {
   };
 
   const setup = (p: p5) => {
-    const container = p.canvas.parentElement;
+    const container = document.getElementById('p5-container');
     const width = container?.clientWidth || window.innerWidth - 300;
     const height = container?.clientHeight || window.innerHeight;
-    p.createCanvas(width, height, p.WEBGL);
+    const canvas = p.createCanvas(width, height, p.WEBGL);
+    canvas.parent('p5-container');
   };
 
   const drawCanvas = (p: p5) => {
@@ -95,9 +98,8 @@ export default function ModularMultiplicationPage() {
       <div style={{ 
         width: '300px', 
         padding: '20px', 
-        backgroundColor: '#f5f5f5',
-        borderRight: '1px solid #ddd',
         backgroundColor: '#000',
+        borderRight: '1px solid #ddd',
         overflowY: 'auto',
       }}>
         <h2 style={{ margin: '0 0 20px 0', fontSize: '20px' }}>Controls</h2>
@@ -184,8 +186,7 @@ export default function ModularMultiplicationPage() {
         </div>
       </div>
 
-      {/* Right Side - Canvas */}
-      <div style={{ 
+      <div id="p5-container" style={{ 
         flex: 1, 
         display: 'flex', 
         justifyContent: 'center', 

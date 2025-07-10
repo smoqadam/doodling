@@ -1,6 +1,7 @@
 'use client';
 
 import P5Canvas from '@/components/P5Canvas';
+import p5 from 'p5';
 import { useState } from 'react';
 
 export default function RotatingPlanePage() {
