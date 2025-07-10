@@ -12,30 +12,38 @@ export default function P5Canvas({ setup, draw, style }: P5CanvasProps) {
   const canvasRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!canvasRef.current) return;
+    if (!canvasRef.current || typeof window === 'undefined') return;
 
     const loadP5 = async () => {
-      const p5 = (await import('p5')).default;
-      
-      const p5Instance = new p5((p) => {
-        p.setup = () => {
-          if (setup) setup(p);
-        };
+      try {
+        const p5Module = await import('p5');
+        const p5 = p5Module.default;
+        
+        const p5Instance = new p5((p) => {
+          p.setup = () => {
+            if (setup) setup(p);
+          };
 
-        p.draw = () => {
-          if (draw) draw(p);
-        };
-      }, canvasRef.current!);
+          p.draw = () => {
+            if (draw) draw(p);
+          };
+        }, canvasRef.current!);
 
-      return () => {
-        p5Instance.remove();
-      };
+        return () => {
+          p5Instance.remove();
+        };
+      } catch (error) {
+        console.error('Failed to load p5.js:', error);
+        return () => {};
+      }
     };
 
     let cleanup: (() => void) | undefined;
     
     loadP5().then((cleanupFn) => {
       cleanup = cleanupFn;
+    }).catch((error) => {
+      console.error('Error in loadP5:', error);
     });
 
     return () => {

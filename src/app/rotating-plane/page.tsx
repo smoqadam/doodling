@@ -63,8 +63,17 @@ export default function RotatingPlanePage() {
             GitHub →
           </a>
           
-          <div style={{ margin: '20px 0', width: '80%', maxWidth: '600px' }}>
-            <label htmlFor="speed-slider" style={{ display: 'block', marginBottom: '8px' }}>
+          <div style={{ 
+            margin: '20px 0', 
+            width: window.innerWidth > 768 ? '80%' : '90%', 
+            maxWidth: '600px',
+            padding: window.innerWidth > 768 ? '20px' : '15px'
+          }}>
+            <label htmlFor="speed-slider" style={{ 
+              display: 'block', 
+              marginBottom: '8px',
+              fontSize: window.innerWidth > 768 ? '16px' : '14px'
+            }}>
               Rotation Speed: {rotationSpeed.toFixed(3)}
             </label>
             <input
@@ -78,7 +87,13 @@ export default function RotatingPlanePage() {
               style={{ width: '100%' }}
             />
           </div>
-          <div id="p5-container" style={{ flex: 1, width: '100%', maxWidth: '600px', height: '400px' }}>
+          <div id="p5-container" style={{ 
+            flex: 1, 
+            width: '100%', 
+            maxWidth: window.innerWidth > 768 ? '600px' : '100%', 
+            height: window.innerWidth > 768 ? '400px' : '300px',
+            padding: window.innerWidth > 768 ? '0' : '10px'
+          }}>
             <P5Canvas setup={setup} draw={draw} />
           </div>
         </div>

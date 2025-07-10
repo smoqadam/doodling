@@ -11,7 +11,8 @@ export default function Page() {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      gap: '20px'
+      gap: '20px',
+      padding: window.innerWidth > 768 ? '0' : '20px'
     }}>
       <a 
         href="https://github.com/smoqadam/genart/" 
@@ -23,21 +24,18 @@ export default function Page() {
           right: '20px', 
           color: '#fff', 
           textDecoration: 'none',
-          fontSize: '16px',
+          fontSize: window.innerWidth > 768 ? '16px' : '14px',
           fontWeight: '600',
-          
         }}
       >
         GitHub →
       </a>
       
-      <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>Doodling with code</h1>
-      {/* <Link 
-        href="/rotating-plane" 
-        
-      >
-        Example page
-      </Link> */}
+      <h1 style={{ 
+        fontSize: window.innerWidth > 768 ? '2rem' : '1.5rem', 
+        fontWeight: 'bold',
+        textAlign: 'center'
+      }}>Doodling with code</h1>
       <Link 
         href="/modular-multiplication" 
       >
