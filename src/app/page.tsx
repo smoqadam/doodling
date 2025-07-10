@@ -25,6 +25,12 @@ export default function Page() {
       >
         Modular multiplication
       </Link>
+
+      <Link 
+        href="/circle" 
+      >
+        Circle
+      </Link>
     </div>
   );
 }
