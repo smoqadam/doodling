@@ -3,36 +3,41 @@
 import { useEffect, useRef } from 'react';
 import p5 from 'p5';
 
-export type P5Sketch = (p: p5) => void;
-
 interface P5CanvasProps {
-  sketch: P5Sketch;
+  setup?: (p: p5) => void;
+  draw?: (p: p5) => void;
   style?: React.CSSProperties;
 }
 
-export default function P5Canvas({ sketch, style }: P5CanvasProps) {
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
+export default function P5Canvas({ setup, draw, style }: P5CanvasProps) {
+  const canvasRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let instance: p5;
+    if (!canvasRef.current) return;
 
-    if (wrapperRef.current) {
-      instance = new p5(sketch, wrapperRef.current);
-    }
+    const p5Instance = new p5((p) => {
+      p.setup = () => {
+        p.createCanvas(600, 400);
+        if (setup) setup(p);
+      };
+
+      p.draw = () => {
+        if (draw) draw(p);
+      };
+    }, canvasRef.current);
 
     return () => {
-      if (instance) instance.remove();
+      p5Instance.remove();
     };
-  }, [sketch]);
+  }, [setup, draw]);
 
   return (
-    <div ref={wrapperRef} style={{
+    <div 
+      ref={canvasRef}
+      style={{
         width: '100%',
         height: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        ...style,
+        ...style
       }}
     />
   );
