@@ -1,8 +1,21 @@
 'use client';
 
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 
 export default function Page() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <div style={{ 
       width: '100vw', 
@@ -12,7 +25,7 @@ export default function Page() {
       justifyContent: 'center',
       alignItems: 'center',
       gap: '20px',
-      padding: window.innerWidth > 768 ? '0' : '20px'
+      padding: isMobile ? '20px' : '0'
     }}>
       <a 
         href="https://github.com/smoqadam/genart/" 
@@ -24,7 +37,7 @@ export default function Page() {
           right: '20px', 
           color: '#fff', 
           textDecoration: 'none',
-          fontSize: window.innerWidth > 768 ? '16px' : '14px',
+          fontSize: isMobile ? '14px' : '16px',
           fontWeight: '600',
         }}
       >
@@ -32,7 +45,7 @@ export default function Page() {
       </a>
       
       <h1 style={{ 
-        fontSize: window.innerWidth > 768 ? '2rem' : '1.5rem', 
+        fontSize: isMobile ? '1.5rem' : '2rem', 
         fontWeight: 'bold',
         textAlign: 'center'
       }}>Doodling with code</h1>
