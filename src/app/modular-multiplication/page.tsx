@@ -3,7 +3,6 @@
 import P5Canvas from '@/components/P5Canvas';
 import { useState } from 'react';
 import { drawShape } from './draw';
-import p5 from 'p5';
 import { Shape } from './types';
 
 export default function ModularMultiplicationPage() {
@@ -70,15 +69,15 @@ export default function ModularMultiplicationPage() {
     ));
   };
 
-  const setup = (p: p5) => {
+  const setup = (p: any) => {
     const container = document.getElementById('p5-container');
-    const width = container?.clientWidth || window.innerWidth - 300;
-    const height = container?.clientHeight || window.innerHeight;
+    const width = container?.clientWidth || (typeof window !== 'undefined' ? window.innerWidth - 300 : 800);
+    const height = container?.clientHeight || (typeof window !== 'undefined' ? window.innerHeight : 600);
     const canvas = p.createCanvas(width, height, p.WEBGL);
     canvas.parent('p5-container');
   };
 
-  const drawCanvas = (p: p5) => {
+  const drawCanvas = (p: any) => {
     p.background(0);
     shapes.forEach(shape => {
       if (shape.enabled)

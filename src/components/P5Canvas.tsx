@@ -1,11 +1,10 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import p5 from 'p5';
 
 interface P5CanvasProps {
-  setup?: (p: p5) => void;
-  draw?: (p: p5) => void;
+  setup?: (p: any) => void;
+  draw?: (p: any) => void;
   style?: React.CSSProperties;
 }
 
@@ -15,19 +14,32 @@ export default function P5Canvas({ setup, draw, style }: P5CanvasProps) {
   useEffect(() => {
     if (!canvasRef.current) return;
 
-    const p5Instance = new p5((p) => {
-      p.setup = () => {
-        p.createCanvas(600, 400);
-        if (setup) setup(p);
-      };
+    const loadP5 = async () => {
+      const p5 = (await import('p5')).default;
+      
+      const p5Instance = new p5((p) => {
+        p.setup = () => {
+          if (setup) setup(p);
+        };
 
-      p.draw = () => {
-        if (draw) draw(p);
+        p.draw = () => {
+          if (draw) draw(p);
+        };
+      }, canvasRef.current!);
+
+      return () => {
+        p5Instance.remove();
       };
-    }, canvasRef.current);
+    };
+
+    let cleanup: (() => void) | undefined;
+    
+    loadP5().then((cleanupFn) => {
+      cleanup = cleanupFn;
+    });
 
     return () => {
-      p5Instance.remove();
+      if (cleanup) cleanup();
     };
   }, [setup, draw]);
 
