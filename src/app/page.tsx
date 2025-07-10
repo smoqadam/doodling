@@ -13,7 +13,25 @@ export default function Page() {
       alignItems: 'center',
       gap: '20px'
     }}>
-      <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>Generative Art Examples</h1>
+      <a 
+        href="https://github.com/smoqadam/genart/" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        style={{ 
+          position: 'absolute', 
+          top: '20px', 
+          right: '20px', 
+          color: '#fff', 
+          textDecoration: 'none',
+          fontSize: '16px',
+          fontWeight: '600',
+          
+        }}
+      >
+        GitHub →
+      </a>
+      
+      <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>Doodling with code</h1>
       <Link 
         href="/rotating-plane" 
         

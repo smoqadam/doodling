@@ -3,6 +3,7 @@
 import P5Canvas from '@/components/P5Canvas';
 import p5 from 'p5';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function RotatingPlanePage() {
     
@@ -13,6 +14,13 @@ export default function RotatingPlanePage() {
       };
     
       const setup = (p: p5) => {
+        const container = document.getElementById('p5-container');
+        
+        // Clear any existing canvases
+        if (container) {
+          container.innerHTML = '';
+        }
+        
         p.createCanvas(600, 400, p.WEBGL);
       };
     
@@ -26,6 +34,35 @@ export default function RotatingPlanePage() {
     
       return (
         <div style={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <Link href="/" style={{ 
+            position: 'absolute', 
+            top: '20px', 
+            left: '20px', 
+            color: '#000', 
+            textDecoration: 'none',
+            fontSize: '16px',
+            fontWeight: '600'
+          }}>
+            ← Back to Home
+          </Link>
+          
+          <a 
+            href="https://github.com/smoqadam/genart/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ 
+              position: 'absolute', 
+              top: '20px', 
+              right: '20px', 
+              color: '#000', 
+              textDecoration: 'none',
+              fontSize: '16px',
+              fontWeight: '600'
+            }}
+          >
+            GitHub →
+          </a>
+          
           <div style={{ margin: '20px 0', width: '80%', maxWidth: '600px' }}>
             <label htmlFor="speed-slider" style={{ display: 'block', marginBottom: '8px' }}>
               Rotation Speed: {rotationSpeed.toFixed(3)}
@@ -41,7 +78,7 @@ export default function RotatingPlanePage() {
               style={{ width: '100%' }}
             />
           </div>
-          <div style={{ flex: 1, width: '100%', maxWidth: '600px', height: '400px' }}>
+          <div id="p5-container" style={{ flex: 1, width: '100%', maxWidth: '600px', height: '400px' }}>
             <P5Canvas setup={setup} draw={draw} />
           </div>
         </div>

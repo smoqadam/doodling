@@ -4,6 +4,7 @@ import P5Canvas from '@/components/P5Canvas';
 import { useState } from 'react';
 import { drawShape } from './draw';
 import { Shape } from './types';
+import Link from 'next/link';
 
 export default function ModularMultiplicationPage() {
   const [radius, setRadius] = useState(100);
@@ -71,6 +72,12 @@ export default function ModularMultiplicationPage() {
 
   const setup = (p: any) => {
     const container = document.getElementById('p5-container');
+    
+    // Clear any existing canvases
+    if (container) {
+      container.innerHTML = '';
+    }
+    
     const width = container?.clientWidth || (typeof window !== 'undefined' ? window.innerWidth - 300 : 800);
     const height = container?.clientHeight || (typeof window !== 'undefined' ? window.innerHeight : 600);
     const canvas = p.createCanvas(width, height, p.WEBGL);
@@ -93,6 +100,24 @@ export default function ModularMultiplicationPage() {
       fontFamily: 'Arial, sans-serif',
       backgroundColor: '#000'
     }}>
+      <a 
+        href="https://github.com/smoqadam/genart/" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        style={{ 
+          position: 'absolute', 
+          top: '20px', 
+          right: '20px', 
+          color: '#fff', 
+          textDecoration: 'none',
+          fontSize: '16px',
+          fontWeight: '600',
+          zIndex: 1000
+        }}
+      >
+        GitHub →
+      </a>
+      
       {/* Left Side - Controls */}
       <div style={{ 
         width: '300px', 
@@ -101,6 +126,17 @@ export default function ModularMultiplicationPage() {
         borderRight: '1px solid #ddd',
         overflowY: 'auto',
       }}>
+        <Link href="/" style={{ 
+          color: '#fff', 
+          textDecoration: 'none',
+          fontSize: '16px',
+          fontWeight: '600',
+          marginBottom: '20px',
+          display: 'block'
+        }}>
+          ← Back to Home
+        </Link>
+        
         <h2 style={{ margin: '0 0 20px 0', fontSize: '20px' }}>Controls</h2>
         
         <div style={{ marginBottom: '20px' }}>
