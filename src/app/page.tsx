@@ -32,12 +32,12 @@ export default function Page() {
       </a>
       
       <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>Doodling with code</h1>
-      <Link 
+      {/* <Link 
         href="/rotating-plane" 
         
       >
-        Rotating Plane Example
-      </Link>
+        Example page
+      </Link> */}
       <Link 
         href="/modular-multiplication" 
       >
