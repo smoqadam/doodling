@@ -31,7 +31,6 @@ export default function CirclePage() {
   const setup = (p: any) => {
     const container = document.getElementById('p5-container');
     
-    // Clear any existing canvases
     if (container) {
       container.innerHTML = '';
     }

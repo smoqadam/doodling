@@ -7,9 +7,9 @@ import { Shape } from './types';
 import Link from 'next/link';
 
 export default function ModularMultiplicationPage() {
-  const [radius, setRadius] = useState(100);
-  const [multiplier, setMultiplier] = useState(100);
-  const [totalPoints, setTotalPoints] = useState(200);
+  const [radius, setRadius] = useState(250);
+  const [multiplier, setMultiplier] = useState(661);
+  const [totalPoints, setTotalPoints] = useState(716);
   const [shapes, setShapes] = useState<Shape[]>([
     {
       name: 'Square',
@@ -19,7 +19,7 @@ export default function ModularMultiplicationPage() {
       points: [],
       totalPoints,
       multiplier,
-      rotate: true,
+      rotate: false,
     },
     {
       name: 'Circle',
@@ -29,7 +29,7 @@ export default function ModularMultiplicationPage() {
       points: [],
       totalPoints,
       multiplier,
-      rotate: false,
+      rotate: true,
 
     }
   ]);
