@@ -60,6 +60,13 @@ export default function Page() {
       >
         Circle
       </Link>
+
+
+      {/* <Link 
+        href="/draw-svg" 
+      >
+        draw svg
+      </Link> */}
     </div>
   );
 }
