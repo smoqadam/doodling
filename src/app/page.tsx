@@ -28,7 +28,7 @@ export default function Page() {
       padding: isMobile ? '20px' : '0'
     }}>
       <a 
-        href="https://github.com/smoqadam/genart/" 
+        href="https://github.com/smoqadam/doodling/" 
         target="_blank" 
         rel="noopener noreferrer"
         style={{ 
