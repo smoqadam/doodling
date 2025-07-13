@@ -5,10 +5,12 @@ import { useEffect, useRef } from 'react';
 interface P5CanvasProps {
   setup?: (p: any) => void;
   draw?: (p: any) => void;
+  mouseClicked?: (p: any, e: object) => void;
+  keyPressed?: (p: any, e: object) => void;
   style?: React.CSSProperties;
 }
 
-export default function P5Canvas({ setup, draw, style }: P5CanvasProps) {
+export default function P5Canvas({ setup, draw, mouseClicked, keyPressed, style }: P5CanvasProps) {
   const canvasRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -27,6 +29,16 @@ export default function P5Canvas({ setup, draw, style }: P5CanvasProps) {
           p.draw = () => {
             if (draw) draw(p);
           };
+
+          p.mouseClicked = (e: object) => {
+            if (mouseClicked) mouseClicked(p, e);
+          };
+
+          p.keyPressed = (e: object) => {
+            if (keyPressed) keyPressed(p, e);
+          };
+
+
         }, canvasRef.current!);
 
         return () => {

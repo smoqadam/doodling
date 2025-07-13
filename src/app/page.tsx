@@ -50,6 +50,12 @@ export default function Page() {
         textAlign: 'center'
       }}>Doodling with code</h1>
       <Link 
+        href="/a-shooting-game" 
+      >
+        A game
+      </Link>
+
+      <Link 
         href="/modular-multiplication" 
       >
         Modular multiplication
